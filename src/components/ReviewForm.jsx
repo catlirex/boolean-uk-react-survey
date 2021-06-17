@@ -1,9 +1,9 @@
 import CheckBoxGp_Features from "../components/CheckBoxGp_Features"
 import RadioGp_OneToFour from "./RadioGp_OneToFour"
 import CheckBoxGp_SpendTime from "../components/CheckBoxGp_SpendTime"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function ReviewForm({setResultList, resultList}){
+export default function ReviewForm({setResultList, resultList, editingFormIndex, setEditingFormIndex}){
     const initialForm={
         bestFeatures: [],
         worstFeatures: [],
@@ -15,8 +15,9 @@ export default function ReviewForm({setResultList, resultList}){
         username: "",
         email: ""
     }
-
     const [reviewForm, setReviewFrom] = useState(initialForm)
+
+    useEffect(()=>{ if(editingFormIndex !== null)setReviewFrom(resultList[editingFormIndex])},[editingFormIndex])
 
     function handleChange(e){
       setReviewFrom({
@@ -25,12 +26,21 @@ export default function ReviewForm({setResultList, resultList}){
       })
     }
 
+    function handleSubmit(e){
+      e.preventDefault()
+      if(editingFormIndex === null) setResultList([...resultList, reviewForm])
+      else {
+        setResultList(resultList.map((review, index)=>{
+        if (index === editingFormIndex) return reviewForm
+        else return review
+      }))
+      setEditingFormIndex(null)
+    }
+      setReviewFrom(initialForm)
+    }
+
     return (
-        <form className="form" onSubmit={e=>{
-          e.preventDefault()
-          setResultList([...resultList, reviewForm])
-          setReviewFrom(initialForm)
-        }}>
+        <form className="form" onSubmit={e=>handleSubmit(e)}>
   <h2>Tell us what you think about your rubber duck!</h2>
   <div className="form__group">
     <h3>What would you say that are the best features of your rubber duck?</h3>

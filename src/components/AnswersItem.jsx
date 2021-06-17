@@ -43,11 +43,12 @@ export default function AnswersItem({
     review,
     bestFeatures,
     worstFeatures
-  }
+  }, setEditingFormIndex, index
 }) {
   return (
     <li>
       <article className="answer">
+        <button onClick={()=> setEditingFormIndex(index)}>Edit</button>
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>
