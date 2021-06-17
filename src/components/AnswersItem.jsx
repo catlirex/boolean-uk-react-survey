@@ -3,8 +3,8 @@
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>
+      {list.map((item, index) => (
+        <li key={index}>
           {Object.keys(answersSet).includes(item)
             ? answersSet[item]
             : answersSetTwo[item]}
@@ -19,14 +19,14 @@ const answersSet = {
   colour: "It's yellow!",
   sound: "It squeaks!",
   logo: "It has a logo!",
-  size: "Its big!"
+  size: "Its big!",
 };
 
 const answersSetTwo = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
 // This is the main component being exported from this file
@@ -34,6 +34,7 @@ export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: {
+    id,
     username,
     email,
     logo,
@@ -42,13 +43,32 @@ export default function AnswersItem({
     timeSpent,
     review,
     bestFeatures,
-    worstFeatures
-  }, setEditingFormIndex, index
+    worstFeatures,
+  },
+  setEditingFormIndex,
+  index,
+  answersList,
+  setResultList,
 }) {
+  function delReview() {
+    fetch(`http://localhost:4000/answers/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() =>
+        setResultList(answersList.filter((target) => target.id !== id))
+      );
+  }
+
   return (
     <li>
       <article className="answer">
-        <button onClick={()=> setEditingFormIndex(index)}>Edit</button>
+        <button className="edit-btn" onClick={() => setEditingFormIndex(index)}>
+          Edit
+        </button>
+        <button className="del-btn" onClick={() => delReview()}>
+          Del
+        </button>
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>

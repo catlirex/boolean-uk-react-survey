@@ -198,8 +198,14 @@ h2 {
   background-color: white;
 }
 
-.answer button {
+.answer .edit-btn {
   position: absolute;
   width: 50px;
-  right: 2vw;
+  right: 1vw;
+}
+
+.answer .del-btn {
+  position: absolute;
+  width: 50px;
+  right: 6vw;
 }

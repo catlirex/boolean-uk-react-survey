@@ -1,0 +1,44 @@
+{
+  "answers": [
+    {
+      "bestFeatures": [
+        "colour",
+        "sound",
+        "logo",
+        "size"
+      ],
+      "worstFeatures": [
+        "colour"
+      ],
+      "consistency": "1",
+      "colour": "1",
+      "logo": null,
+      "timeSpent": [
+        "bathing",
+        "swimming"
+      ],
+      "review": "nth",
+      "username": "cat",
+      "email": "",
+      "id": 2
+    },
+    {
+      "bestFeatures": [
+        "logo"
+      ],
+      "worstFeatures": [
+        "logo"
+      ],
+      "consistency": "3",
+      "colour": "2",
+      "logo": "2",
+      "timeSpent": [
+        "bathing"
+      ],
+      "review": "",
+      "username": "",
+      "email": "",
+      "id": 3
+    }
+  ]
+}
